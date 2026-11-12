@@ -23,8 +23,10 @@ const OUTPUT_DIR = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 const MICRO = 1_000_000;
 
 // --- Fixed calibration (set in advance, never tuned on any answer) ---
-/** Monte Carlo draws per answer-read horizon. */
-const DRAWS_PER_HORIZON = 4000;
+/** Monte Carlo draws per answer-read horizon. 12000 keeps the standard error of a
+ *  p=0.30 place probability near 0.004 (vs 0.007 at 4000) while the whole run stays
+ *  far under the 300s cap; simulation noise must not decide places the model ties. */
+const DRAWS_PER_HORIZON = 12000;
 /** Candidate coins simulated; the rest share the unnamed mass. */
 const MAX_CANDIDATES = 220;
 /** Unnamed mass per place: coins born after the cut take places too. */
